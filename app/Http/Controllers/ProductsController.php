@@ -43,7 +43,7 @@ class ProductsController extends ApiController
         // } else {
         //     $data['image'] = 'no-img.jpg';
         // }
-        $data['image'] = $request->image;
+        $data['image'] = $request->name . '.' . Str::after($request->image, '.');
         // dd($data);
         $product = Products::create($data);
         return $this->showOne($product);
@@ -105,5 +105,8 @@ class ProductsController extends ApiController
         $comment->prd_id = $request->id;
         $comment->save();
         return response()->json(['status' => 'thanh cong', 'data' => $comment]);
+    }
+    function saveFile(Request $request)
+    {
     }
 }

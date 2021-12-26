@@ -21,4 +21,12 @@ Route::get('hoa-don', 'OrdersController@index');
 Route::get('changestatus/{id}', 'OrdersController@changeStatus');
 Route::get('show-order/{id}', 'OrdersController@showOrder');
 
+// slider
+Route::get('listslider', 'SliderController@index');
+Route::get('slider/{id}', 'SliderController@getbyid');
+// banner
+Route::get('listbanner', 'BannerController@index');
+Route::get('banner/{id}', 'BannerController@getbyid');
+Route::post('banner_update/{id}', 'BannerController@bannerUpdate');
+
 Route::get('thong-ke', 'AdminController@index');
