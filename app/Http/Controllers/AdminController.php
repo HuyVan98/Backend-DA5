@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Comments;
-use App\Products;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 use App\Orders;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends ApiController
 {
@@ -22,8 +22,8 @@ class AdminController extends ApiController
     }
     function loginApi(Request $request)
     {
-        $user = User::where('email', $request->email)->where('password', $request->password)->first();
-        if ($user) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user=Auth::user();
             return response()->json(['data' => $user, 'status' => 1]);
         }
         return response()->json(['status' => 'that bai']);

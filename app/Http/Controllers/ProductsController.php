@@ -106,7 +106,22 @@ class ProductsController extends ApiController
         $comment->save();
         return response()->json(['status' => 'thanh cong', 'data' => $comment]);
     }
-    function saveFile(Request $request)
+    function productNew()
     {
+        $data=Products::orderBy('created_at', 'ASC')->take('6')->get();
+        return response()->json(['status' => 'thanh cong', 'data' => $data]);
     }
+    function search(Request $request)
+    {
+        $data=Products::where('name', 'LIKE', "%$request->name%")->get();
+        $total=Products::where('name', 'LIKE', "%$request->name%")->get()->count();
+        $name=$request->name;
+        return response()->json([
+            'status' => 'thanh cong',
+            'data' => $data,
+            'name' =>  $name,
+            'total' => $total
+        ]);
+    }
+
 }
